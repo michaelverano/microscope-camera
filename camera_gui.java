@@ -1,4 +1,7 @@
 import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.scene.effect.*;
+import javafx.scene.input.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,8 +23,9 @@ import javafx.scene.paint.Color;
 
 public class camera_gui extends Application {
     float ButtonHeight = 630.0f;
+    DropShadow shadow = new DropShadow();
 
-    	@Override
+       @Override
 	public void start(Stage stage) throws Exception {
 	    //Button_1 - Detect Camera
 	    Button button1 = new Button("Detect Camera");
@@ -31,7 +35,18 @@ public class camera_gui extends Application {
 	    button1.setMinWidth(100.0f);
 	    button1.setMinHeight(50.0f);
 
-	    
+	    //Button 1 Actions - shadow when mouse cursor on top
+	    button1.addEventHandler(MouseEvent.MOUSE_ENTERED,
+	    			    new EventHandler<MouseEvent>() {
+	    				public void handle(MouseEvent e) {
+	    				    button1.setEffect(shadow);
+	    				}});	 
+       	    button1.addEventHandler(MouseEvent.MOUSE_EXITED,
+				    new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent e) {
+					    button1.setEffect(null);
+					}});
+   
 	    //Button 2 - Take Picture
 	    Button button2 = new Button("Take Picture");
 	    button2.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
@@ -39,6 +54,19 @@ public class camera_gui extends Application {
 	    button2.setLayoutY(ButtonHeight);
 	    button2.setMinWidth(100.0f);
 	    button2.setMinHeight(50.0f);
+
+	    //Button 2 Actions - shadow when mouse cursor on top
+	    button2.addEventHandler(MouseEvent.MOUSE_ENTERED,
+				    new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent e) {
+					    button2.setEffect(shadow);
+					}});
+	    button2.addEventHandler(MouseEvent.MOUSE_EXITED,
+				    new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent e) {
+					    button2.setEffect(null);
+					}});
+
 	    
 	    //Button 3 - Share Picture
 	    Button button3 = new Button("Share Picture");
@@ -47,6 +75,18 @@ public class camera_gui extends Application {
 	    button3.setLayoutY(ButtonHeight);
 	    button3.setMinWidth(100.0f);
 	    button3.setMinHeight(50.0f);
+	    
+      	    // Button 3 Actions - Shadow when mouse cursor on top
+	    button3.addEventHandler(MouseEvent.MOUSE_ENTERED,
+				    new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent e) {
+					    button3.setEffect(shadow);
+					}});
+	    button3.addEventHandler(MouseEvent.MOUSE_EXITED,
+				    new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent e) {
+					    button3.setEffect(null);
+					}});
 
 	    
 	    // Draw rectangle and its properties
@@ -78,7 +118,6 @@ public class camera_gui extends Application {
 	    text2.setFill(Color.WHITE);
 	    text2.setX(1040.0f);
 	    text2.setY(70.0f);
-
 	    
 	    // Text 3 - LTOR
 	    Text text3 = new Text();
@@ -87,12 +126,10 @@ public class camera_gui extends Application {
 	    text3.setFill(Color.WHITE);
 	    text3.setX(1050.0f);
 	    text3.setY(650.0f);
-
 	    
 	    //Create Groupings
 	    Group root = new Group(rectangle, button1, button2, button3, rectangle2,
 				   text1, text2, text3);
-
 	    
 	    //Creating a scene object
 	    Scene scene = new Scene(root, 1350, 700, Color.GREY);
@@ -103,11 +140,10 @@ public class camera_gui extends Application {
 	    //Adding scene to the stage
 	    stage.setScene(scene);
 
-	    
 	    //Displaying to the contents of the stage
-	    stage.show();
-	    
+	    stage.show();   
 	}
+    
     public static void main(String args[]){
 	launch(args);
     }
