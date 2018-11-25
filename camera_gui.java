@@ -1,3 +1,7 @@
+import java.lang.*;
+import java.io.*;
+
+// JavaFX
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.effect.*;
@@ -20,6 +24,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.paint.Color;
+
+// Import functionalities
+import camera.operations.detect_camera;
 
 public class camera_gui extends Application {
     float ButtonHeight = 630.0f;
@@ -46,7 +53,17 @@ public class camera_gui extends Application {
 					public void handle(MouseEvent e) {
 					    button1.setEffect(null);
 					}});
-   
+	    
+	    //Button 1 When Clicked - Run gphoto2 auto-detect
+	    button1.addEventHandler(MouseEvent.MOUSE_CLICKED,
+	    			    new EventHandler<MouseEvent>() {
+	    				public void handle(MouseEvent e) {
+	    				    detect_camera auto_detect = new detect_camera();
+	    				    auto_detect.start();
+	    				}});
+				    
+					    
+	    
 	    //Button 2 - Take Picture
 	    Button button2 = new Button("Take Picture");
 	    button2.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
