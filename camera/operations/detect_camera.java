@@ -1,9 +1,13 @@
 package camera.operations;
 import java.io.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class detect_camera {
 
-    public void start() {
+     public List start() {
 	String s = null;
 	
 	try {
@@ -14,34 +18,37 @@ public class detect_camera {
 
 	    BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
-	    System.out.println("Running gphoto2 --autodetect");
+	    //System.out.println("Running gphoto2 --autodetect");
+
+	    List<String> outputList = new ArrayList<String>();
+	    outputList.add("Running gphoto2 --autodetect");
 	    while ((s = stdInput.readLine()) != null) {
-		System.out.println(s);
+		//System.out.println(s);
+		outputList.add(s);
+	    }
+	    
+	    // warning for errors.
+	    if (stdError.readLine() != null) {
+		//System.out.println("An error occured when running the program: ");
+		outputList.add("An error occurred when running the program: ");
+		//System.out.println(s);
+		outputList.add(s);
 	    }
 
-	    // Escape program if no runtime stdErrors exist.
-	    // if (stdError.readLine() == null) {
-	    // 	System.exit(0);
-	    // }
-
-		
-	    System.out.println("An error occured when running the program: ");
-	    while ((s = stdError.readLine()) != null) {
-		System.out.println(s);
-	    }
-
-	    //System.exit(0);
-	}
+	    return outputList;
+     	}
 
 	catch (IOException e) {
 	    e.printStackTrace();
 	    System.exit(-1);
-	}
+	}	
 
-    }
-
+	return null;
+     }
+    
+    
     public static void main(String args[]) {
 	detect_camera auto_detect = new detect_camera();
-	auto_detect.start();
+	List outputList = auto_detect.start();
     }
 }

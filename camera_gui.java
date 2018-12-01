@@ -1,5 +1,6 @@
 import java.lang.*;
 import java.io.*;
+import java.util.List;
 
 // JavaFX
 import javafx.application.Application;
@@ -25,7 +26,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.paint.Color;
 
-// Import functionalities
+// Import functionalities - packages
 import camera.operations.detect_camera;
 
 public class camera_gui extends Application {
@@ -34,7 +35,24 @@ public class camera_gui extends Application {
 
        @Override
 	public void start(Stage stage) throws Exception {
-	    //Button_1 - Detect Camera
+	    //Text 1 - Detect Camera
+	    Text text1 = new Text();
+	    text1.setText("Detect Camera by Pressing 1, \n or clicking the button");
+	    text1.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 40));
+	    text1.setFill(Color.WHITE);
+	    text1.setX(50.0f);
+	    text1.setY(500.0f);
+
+       	    //Text 2 - Log
+	    Text text2 = new Text();
+	    text2.setWrappingWidth(300);
+	    text2.setText("Log...");
+	    text2.setFont(Font.font("verdana", FontPosture.REGULAR, 20));
+	    text2.setFill(Color.WHITE);
+	    text2.setX(1040.0f);
+	    text2.setY(70.0f);
+	    
+	   //Button_1 - Detect Camera
 	    Button button1 = new Button("Detect Camera");
        	    button1.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
 	    button1.setLayoutX(10.0f);
@@ -58,11 +76,27 @@ public class camera_gui extends Application {
 	    button1.addEventHandler(MouseEvent.MOUSE_CLICKED,
 	    			    new EventHandler<MouseEvent>() {
 	    				public void handle(MouseEvent e) {
-	    				    detect_camera auto_detect = new detect_camera();
-	    				    auto_detect.start();
-	    				}});
-				    
+					    text1.setText("Detecting Camera...");
+					    detect_camera auto_detect = new detect_camera();
+	    				    List outputList = auto_detect.start();
+
+					    //Replace Text2
+					    String raw_text = outputList.get(3).toString();
 					    
+					    if (outputList.size() < 4) {
+						text1.setText("Camera not detected...");
+						}
+					    else if (outputList.size() == 4) {
+						text1.setText("Camera detected.");
+					        text2.setText(raw_text);
+					    }
+
+
+
+
+					    
+	    				}});
+
 	    
 	    //Button 2 - Take Picture
 	    Button button2 = new Button("Take Picture");
@@ -119,22 +153,8 @@ public class camera_gui extends Application {
 	    rectangle2.setY(50.0f);
 	    rectangle2.setWidth(300.0f);
 	    rectangle2.setHeight(500.0f);
-
-	    //Text 1 - Detect Camera
-	    Text text1 = new Text();
-	    text1.setText("Detect Camera by Pressing 1, \n or clicking the button");
-	    text1.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 40));
-	    text1.setFill(Color.WHITE);
-	    text1.setX(50.0f);
-	    text1.setY(500.0f);
 	    
-	    //Text 2 - Log
-	    Text text2 = new Text();
-	    text2.setText("Log...");
-	    text2.setFont(Font.font("verdana", FontPosture.REGULAR, 20));
-	    text2.setFill(Color.WHITE);
-	    text2.setX(1040.0f);
-	    text2.setY(70.0f);
+
 	    
 	    // Text 3 - LTOR
 	    Text text3 = new Text();
@@ -160,7 +180,7 @@ public class camera_gui extends Application {
 	    //Displaying to the contents of the stage
 	    stage.show();   
 	}
-    
+
     public static void main(String args[]){
 	launch(args);
     }
