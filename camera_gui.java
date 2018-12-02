@@ -81,20 +81,16 @@ public class camera_gui extends Application {
 	    				    List outputList = auto_detect.start();
 
 					    //Replace Text2
-					    String raw_text = outputList.get(3).toString();
-					    
 					    if (outputList.size() < 4) {
 						text1.setText("Camera not detected...");
-						}
-					    else if (outputList.size() == 4) {
+						text2.setText("---");
+					    };
+
+					    if  (outputList.size() == 4) {
+						String raw_text = outputList.get(3).toString();
 						text1.setText("Camera detected.");
 					        text2.setText(raw_text);
-					    }
-
-
-
-
-					    
+					    };
 	    				}});
 
 	    
