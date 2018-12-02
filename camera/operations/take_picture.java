@@ -1,8 +1,9 @@
+package camera.operations;
 import java.io.*;
 
 public class take_picture {
 
-    public static void main(String arg[]) {
+    public String start() {
 	String s = null;
 
 	try {
@@ -19,22 +20,29 @@ public class take_picture {
 	    }
 
 	
-       	    //Escape program if no runtime stdErrors exist.
-	    if (stdError.readLine() == null) {
-	    System.exit(0);
-	    }
-
+	    if (stdError.readLine() != null) {
 	    System.out.println("An error occured when running the program: ");
-	    while ((s = stdError.readLine()) != null) {
-	    	System.out.println(s);
+	    	while ((s = stdError.readLine()) != null) {
+		    	System.out.println(s);
+		}
 	    }
 
-	    System.exit(0);
+
 	}
 	catch (IOException e) {
 	    e.printStackTrace();
-	    System.exit(-1);
+
+	    return "Camera Error";
+	    
 	}
+
+	return null;
     }
+
+    public static void main(String arg[]) {
+	take_picture take_a_pic = new take_picture();
+	take_a_pic.start();
+    }
+
 }
 	

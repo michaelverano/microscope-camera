@@ -28,6 +28,8 @@ import javafx.scene.paint.Color;
 
 // Import functionalities - packages
 import camera.operations.detect_camera;
+import camera.operations.take_picture;
+import camera.operations.download_pictures;
 
 public class camera_gui extends Application {
     float ButtonHeight = 630.0f;
@@ -51,6 +53,21 @@ public class camera_gui extends Application {
 	    text2.setFill(Color.WHITE);
 	    text2.setX(1040.0f);
 	    text2.setY(70.0f);
+
+	    // Draw rectangle and its properties
+	    Rectangle rectangle = new Rectangle();
+	    rectangle.setX(10.0f);
+	    rectangle.setY(40.0f);
+	    rectangle.setWidth(1000.0f);
+	    rectangle.setHeight(575.0f);
+
+	    // Draw rectangle of updates.
+	    Rectangle rectangle2 = new Rectangle();
+	    rectangle2.setX(1030.0f);
+	    rectangle2.setY(50.0f);
+	    rectangle2.setWidth(300.0f);
+	    rectangle2.setHeight(500.0f);
+
 	    
 	   //Button_1 - Detect Camera
 	    Button button1 = new Button("Detect Camera");
@@ -113,6 +130,36 @@ public class camera_gui extends Application {
 					public void handle(MouseEvent e) {
 					    button2.setEffect(null);
 					}});
+	    button2.addEventHandler(MouseEvent.MOUSE_CLICKED,
+				    new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent e) {
+					    detect_camera auto_detect = new detect_camera();
+					    List outputList = auto_detect.start();
+					    
+					    if (outputList.size() == 4) {
+						text1.setText("Taking photo...");
+						take_picture take_a_pic = new take_picture();
+
+						take_a_pic.start();
+
+						text2.setText("Photo Taken");
+
+						//Download images
+						download_pictures download_pics = new download_pictures();
+						download_pics.start()
+						
+						//Show the latest image
+
+
+
+
+						
+					    } else {
+						text1.setText("Picture not taken");
+						text2.setText("Error occurred");
+					    }
+					}});
+				   
 
 	    
 	    //Button 3 - Share Picture
@@ -135,20 +182,10 @@ public class camera_gui extends Application {
 					    button3.setEffect(null);
 					}});
 
-	    
-	    // Draw rectangle and its properties
-	    Rectangle rectangle = new Rectangle();
-	    rectangle.setX(10.0f);
-	    rectangle.setY(40.0f);
-	    rectangle.setWidth(1000.0f);
-	    rectangle.setHeight(575.0f);
+	
 
-	    // Draw rectangle of updates.
-	    Rectangle rectangle2 = new Rectangle();
-	    rectangle2.setX(1030.0f);
-	    rectangle2.setY(50.0f);
-	    rectangle2.setWidth(300.0f);
-	    rectangle2.setHeight(500.0f);
+	    
+	
 	    
 
 	    
