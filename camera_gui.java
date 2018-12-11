@@ -29,7 +29,13 @@ import javafx.scene.paint.Color;
 // Import functionalities - packages
 import camera.operations.detect_camera;
 import camera.operations.take_picture;
-import camera.operations.download_pictures;
+import camera.operations.parse_text;
+import camera.operations.removeJPG;
+
+//Import image functions
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
 
 public class camera_gui extends Application {
     float ButtonHeight = 630.0f;
@@ -105,6 +111,7 @@ public class camera_gui extends Application {
 
 					    if  (outputList.size() == 4) {
 						String raw_text = outputList.get(3).toString();
+						rectangle.setFill(Color.BLACK);
 						text1.setText("Camera detected.");
 					        text2.setText(raw_text);
 					    };
@@ -133,27 +140,39 @@ public class camera_gui extends Application {
 	    button2.addEventHandler(MouseEvent.MOUSE_CLICKED,
 				    new EventHandler<MouseEvent>() {
 					public void handle(MouseEvent e) {
+					    //Remove JPG items
+					    // removeJPG remove_jpg = new removeJPG();
+					    // remove_jpg.start();
+					    
 					    detect_camera auto_detect = new detect_camera();
 					    List outputList = auto_detect.start();
 					    
 					    if (outputList.size() == 4) {
 						text1.setText("Taking photo...");
-						take_picture take_a_pic = new take_picture();
+						// take_picture take_a_pic = new take_picture();
 
-						take_a_pic.start();
+						// take_a_pic.start();
 
 						text2.setText("Photo Taken");
-
-						//Download images
-						download_pictures download_pics = new download_pictures();
-						download_pics.start()
-						
+											
 						//Show the latest image
+						//LEFT OFF HERE
+						//ERROR OCCURS WHEN CLICKING
+						parse_text parse_a_text = new parse_text();
+						String JPG_file = parse_a_text.start();
+						System.out.println(JPG_file);
 
+						Image image = new Image(JPG_file);
+						ImageView imageView = new ImageView(image);
+						imageView.setX(10f);
+						imageView.setY(40f);
 
+						imageView.setFitHeight(575f);
+						imageView.setFitWidth(1000f);
 
+						text1.setText(null);
+						rectangle.setFill(new ImagePattern(image));
 
-						
 					    } else {
 						text1.setText("Picture not taken");
 						text2.setText("Error occurred");
@@ -181,12 +200,6 @@ public class camera_gui extends Application {
 					public void handle(MouseEvent e) {
 					    button3.setEffect(null);
 					}});
-
-	
-
-	    
-	
-	    
 
 	    
 	    // Text 3 - LTOR
@@ -216,7 +229,5 @@ public class camera_gui extends Application {
 
     public static void main(String args[]){
 	launch(args);
-    }
-
-    
+    }    
 }

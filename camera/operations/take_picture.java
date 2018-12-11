@@ -8,17 +8,26 @@ public class take_picture {
 
 	try {
 	    // run gphoto2 --capture-image
-	    Process p = Runtime.getRuntime().exec("gphoto2 --capture-image");
+	    Process p = Runtime.getRuntime().exec("gphoto2 --capture-image-and-download");
 
 	    BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
 	    BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
-	    System.out.println("Running gphoto2 --capture-image");
-	    while ((s = stdInput.readLine()) != null) {
-		System.out.println(s);
-	    }
+	    System.out.println("Running gphoto2 --capture-image-and-download");
 
+	    int counter_ = 0;
+	    String rawString = null;
+	    while ((s = stdInput.readLine()) != null) {
+	    	System.out.println(s);
+		System.out.println(counter_);
+
+		if (counter_ == 1) {
+		    rawString = s;
+		}
+		
+		counter_ = counter_ + 1;
+	    }
 	
 	    if (stdError.readLine() != null) {
 	    System.out.println("An error occured when running the program: ");
@@ -43,6 +52,4 @@ public class take_picture {
 	take_picture take_a_pic = new take_picture();
 	take_a_pic.start();
     }
-
-}
-	
+}	
