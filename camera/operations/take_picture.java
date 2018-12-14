@@ -1,6 +1,7 @@
 package camera.operations;
 import java.io.*;
 
+
 public class take_picture {
 
     public String start() {
@@ -44,8 +45,10 @@ public class take_picture {
 	    return "Camera Error";
 	    
 	}
-
-	return null;
+	// System.out.println("Test A");
+	// System.out.println(s);
+	// System.out.println("Test B");
+	return s;
     }
 
     public static void main(String arg[]) {

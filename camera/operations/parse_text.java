@@ -1,17 +1,17 @@
-package camera.operations;
+//package camera.operations;
 import java.io.*;
 import java.util.*;
 
 public class parse_text {
     
-    public String start() {
-	String textString = "Saving file as P1010003.JPG";
+    public String start(String jpg_file) {
+	String textString = jpg_file;
 
 	System.out.println(textString);
 
 	// split string
 	String[] splitted = textString.split(" ");
-
+	
 	System.out.println(Arrays.toString(splitted));
 
 	// Get last item
@@ -25,7 +25,7 @@ public class parse_text {
     
     public static void main(String arg[]) {
 	parse_text parse_text = new parse_text();
-	String outPutItem = parse_text.start();
+	String outPutItem = parse_text.start("./1010101.JPG");
 	System.out.println(outPutItem);
     }
 }

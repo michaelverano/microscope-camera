@@ -31,6 +31,7 @@ import camera.operations.detect_camera;
 import camera.operations.take_picture;
 import camera.operations.parse_text;
 import camera.operations.removeJPG;
+import camera.operations.findJPG;
 
 //Import image functions
 import javafx.scene.image.Image;
@@ -141,37 +142,37 @@ public class camera_gui extends Application {
 				    new EventHandler<MouseEvent>() {
 					public void handle(MouseEvent e) {
 					    //Remove JPG items
-					    // removeJPG remove_jpg = new removeJPG();
-					    // remove_jpg.start();
+					    removeJPG remove_jpg = new removeJPG();
+					    remove_jpg.start();
 					    
 					    detect_camera auto_detect = new detect_camera();
 					    List outputList = auto_detect.start();
 					    
 					    if (outputList.size() == 4) {
 						text1.setText("Taking photo...");
-						// take_picture take_a_pic = new take_picture();
+						take_picture take_a_pic = new take_picture();
+						take_a_pic.start();
 
-						// take_a_pic.start();
-
-						text2.setText("Photo Taken");
-											
-						//Show the latest image
-						//LEFT OFF HERE
-						//ERROR OCCURS WHEN CLICKING
-						parse_text parse_a_text = new parse_text();
+					        text2.setText("Photo Taken");
+						
+						findJPG find_jpg = new findJPG();
+						String jpg_file = find_jpg.start();
+						
+						parse_text parse_a_text = new parse_text(jpg_file);
 						String JPG_file = parse_a_text.start();
 						System.out.println(JPG_file);
 
-						Image image = new Image(JPG_file);
-						ImageView imageView = new ImageView(image);
-						imageView.setX(10f);
-						imageView.setY(40f);
+						// Left off here
+						// Image image = new Image(JPG_file);
+						// ImageView imageView = new ImageView(image);
+						// imageView.setX(10f);
+						// imageView.setY(40f);
 
-						imageView.setFitHeight(575f);
-						imageView.setFitWidth(1000f);
+						// imageView.setFitHeight(575f);
+						// imageView.setFitWidth(1000f);
 
-						text1.setText(null);
-						rectangle.setFill(new ImagePattern(image));
+						// text1.setText(null);
+						// rectangle.setFill(new ImagePattern(image));
 
 					    } else {
 						text1.setText("Picture not taken");
