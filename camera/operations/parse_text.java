@@ -1,4 +1,4 @@
-//package camera.operations;
+package camera.operations;
 import java.io.*;
 import java.util.*;
 
@@ -7,18 +7,21 @@ public class parse_text {
     public String start(String jpg_file) {
 	String textString = jpg_file;
 
-	System.out.println(textString);
+	//System.out.println(textString);
 
 	// split string
 	String[] splitted = textString.split(" ");
 	
-	System.out.println(Arrays.toString(splitted));
+	//System.out.println(Arrays.toString(splitted));
 
 	// Get last item
 	String last_item = splitted[splitted.length-1];
 
-	System.out.println(last_item);
-	return last_item;
+	// Strip the ./
+	String cleaned_item = last_item.replace("./", "");
+	
+	//System.out.println(cleaned_item);
+	return cleaned_item;
 	
     }
 

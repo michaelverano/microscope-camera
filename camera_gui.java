@@ -158,21 +158,21 @@ public class camera_gui extends Application {
 						findJPG find_jpg = new findJPG();
 						String jpg_file = find_jpg.start();
 						
-						parse_text parse_a_text = new parse_text(jpg_file);
-						String JPG_file = parse_a_text.start();
+						parse_text parse_a_text = new parse_text();
+						String JPG_file = parse_a_text.start(jpg_file);
 						System.out.println(JPG_file);
 
 						// Left off here
-						// Image image = new Image(JPG_file);
-						// ImageView imageView = new ImageView(image);
-						// imageView.setX(10f);
-						// imageView.setY(40f);
+						Image image = new Image(JPG_file);
+						ImageView imageView = new ImageView(image);
+						imageView.setX(10f);
+						imageView.setY(40f);
 
-						// imageView.setFitHeight(575f);
-						// imageView.setFitWidth(1000f);
+						imageView.setFitHeight(575f);
+						imageView.setFitWidth(1000f);
 
-						// text1.setText(null);
-						// rectangle.setFill(new ImagePattern(image));
+						text1.setText(null);
+						rectangle.setFill(new ImagePattern(image));
 
 					    } else {
 						text1.setText("Picture not taken");
