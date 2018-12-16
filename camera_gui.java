@@ -32,11 +32,15 @@ import camera.operations.take_picture;
 import camera.operations.parse_text;
 import camera.operations.removeJPG;
 import camera.operations.findJPG;
+import camera.operations.configuration;
 
 //Import image functions
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
+
+//Pop ups
+import javafx.stage.Popup;
 
 public class camera_gui extends Application {
     float ButtonHeight = 630.0f;
@@ -201,7 +205,35 @@ public class camera_gui extends Application {
 					public void handle(MouseEvent e) {
 					    button3.setEffect(null);
 					}});
+	    button3.addEventHandler(MouseEvent.MOUSE_CLICKED,
+				    new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent e) {
+					    //Test if config file exists
+					    configuration configs = new configuration();
+					    boolean need_to_setup = configs.start();
+					    
+					    //Create pop up to get config credentials
+					    if (need_to_setup == true) {
 
+						//LEFT OFF HERE
+						//CREATE POP UP TO GET LTOR CREDENTIALS FOR EMAIL
+						//LOOK AT get_credentials_gui.java AND GET IT TO
+						//WORK AS A POP UP.
+						
+
+
+
+
+						
+					    }
+					    
+					    //Test if users exist
+					    
+					    //Send picture to email
+					}});
+				    
+				    
+	    
 	    
 	    // Text 3 - LTOR
 	    Text text3 = new Text();
