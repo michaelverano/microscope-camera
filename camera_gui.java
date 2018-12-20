@@ -11,13 +11,17 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+
 
 // Rectangle Stuffs
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.*;
 
-// Buttons
-import javafx.scene.control.Button;
 
 // Text
 import javafx.scene.text.Text;
@@ -33,14 +37,17 @@ import camera.operations.parse_text;
 import camera.operations.removeJPG;
 import camera.operations.findJPG;
 import camera.operations.configuration;
+import camera.operations.credentials_gui;
 
 //Import image functions
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.layout.VBox;
 
 //Pop ups
 import javafx.stage.Popup;
+import javafx.stage.Modality;
 
 public class camera_gui extends Application {
     float ButtonHeight = 630.0f;
@@ -215,21 +222,51 @@ public class camera_gui extends Application {
 					    //Create pop up to get config credentials
 					    if (need_to_setup == true) {
 
+						Text gmailText = new Text("Gmail Account: ");
+						Text passText = new Text("Password");
+
+						TextField gmailtxtField = new TextField();
+						PasswordField passTextField = new PasswordField();
+
+						Button submitButton = new Button("Submit");
+						Button clearButton = new Button("Clear");
+
+						GridPane gridPane = new GridPane();
+
+						//Set up GridPane
+						gridPane.setMinSize(400, 200);
+						gridPane.setVgap(5);
+						gridPane.setHgap(5);
+						gridPane.setAlignment(Pos.CENTER);
+
+						//Arranging hte nodes in the grid
+						gridPane.add(gmailText, 0, 0);
+						gridPane.add(gmailtxtField, 1, 0);
+						gridPane.add(passText, 0, 1);
+						gridPane.add(passTextField, 1, 1);
+						gridPane.add(submitButton, 0, 2);
+						gridPane.add(clearButton, 1, 2);
+
+						//Styling Nodes
 						//LEFT OFF HERE
-						//CREATE POP UP TO GET LTOR CREDENTIALS FOR EMAIL
-						//LOOK AT get_credentials_gui.java AND GET IT TO
-						//WORK AS A POP UP.
+						//GRIDPANE NOT SHOWING 
 						
-
-
-
-
+						final Stage dialog = new Stage();
+						dialog.initModality(Modality.APPLICATION_MODAL);
+						dialog.initOwner(stage);
 						
+						VBox dialogVbox = new VBox(20);
+						Scene dialogScene = new Scene(dialogVbox, 300, 200);
+						dialog.setScene(dialogScene);
+						dialog.show();
+						    
 					    }
+						
+					    //store password and email in variable.
 					    
-					    //Test if users exist
+					    //Test if users exist.
 					    
-					    //Send picture to email
+					    //Send picture to email.
 					}});
 				    
 				    
