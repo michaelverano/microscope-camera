@@ -217,10 +217,10 @@ public class camera_gui extends Application {
 					public void handle(MouseEvent e) {
 					    //Test if config file exists
 					    configuration configs = new configuration();
-					    boolean need_to_setup = configs.start();
+					    //boolean need_to_setup = configs.start();
 					    
 					    //Create pop up to get config credentials
-					    if (need_to_setup == true) {
+					    //if (need_to_setup == true) {
 
 						Text gmailText = new Text("Gmail Account: ");
 						Text passText = new Text("Password");
@@ -229,7 +229,6 @@ public class camera_gui extends Application {
 						PasswordField passTextField = new PasswordField();
 
 						Button submitButton = new Button("Submit");
-						Button clearButton = new Button("Clear");
 
 						GridPane gridPane = new GridPane();
 
@@ -239,28 +238,34 @@ public class camera_gui extends Application {
 						gridPane.setHgap(5);
 						gridPane.setAlignment(Pos.CENTER);
 
-						//Arranging hte nodes in the grid
+						//Arranging the nodes in the grid
 						gridPane.add(gmailText, 0, 0);
 						gridPane.add(gmailtxtField, 1, 0);
 						gridPane.add(passText, 0, 1);
 						gridPane.add(passTextField, 1, 1);
 						gridPane.add(submitButton, 0, 2);
-						gridPane.add(clearButton, 1, 2);
 
-						//Styling Nodes
-						//LEFT OFF HERE
-						//GRIDPANE NOT SHOWING 
-						
+						//Set new stage and scene
 						final Stage dialog = new Stage();
 						dialog.initModality(Modality.APPLICATION_MODAL);
 						dialog.initOwner(stage);
 						
-						VBox dialogVbox = new VBox(20);
-						Scene dialogScene = new Scene(dialogVbox, 300, 200);
+						Scene dialogScene = new Scene(gridPane);
 						dialog.setScene(dialogScene);
 						dialog.show();
-						    
-					    }
+
+						//Store user account and password.
+						submitButton.addEventHandler(MouseEvent.MOUSE_CLICKED,
+									     new EventHandler<MouseEvent>() {
+										 public void handle(MouseEvent e) {
+										     //STORE USER ACCOUNT AND PASSWORD
+										     System.out.println(gmailtxtField);
+										     System.out.println(passTextField);
+										 }
+									     });
+
+						
+						//}
 						
 					    //store password and email in variable.
 					    
