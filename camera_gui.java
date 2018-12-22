@@ -38,6 +38,7 @@ import camera.operations.removeJPG;
 import camera.operations.findJPG;
 import camera.operations.configuration;
 import camera.operations.credentials_gui;
+import camera.operations.encode_settings;
 
 //Import image functions
 import javafx.scene.image.Image;
@@ -258,9 +259,17 @@ public class camera_gui extends Application {
 						submitButton.addEventHandler(MouseEvent.MOUSE_CLICKED,
 									     new EventHandler<MouseEvent>() {
 										 public void handle(MouseEvent e) {
+
+										     //LEFT OFF HERE
 										     //STORE USER ACCOUNT AND PASSWORD
-										     System.out.println(gmailtxtField);
-										     System.out.println(passTextField);
+										     encode_settings encoding = new encode_settings();
+										     String[] encoded_user,  encoded_pass = encoding.start_encoding(gmailtxtField.getText(), passTextField.getText());
+										     //STORE USER ACCOUNT AND PASSWORD IN .PROPERTIES FILE
+
+										     //CLOSE POP UP.
+
+										     //LOG INTO GOOGLE ACCOUNT.
+
 										 }
 									     });
 
