@@ -15,11 +15,11 @@ public class encode_settings {
     public String[] start_encoding(String user_name, String pass_word) {
 	byte[] password_message = pass_word.getBytes(StandardCharsets.UTF_8);
 	String encoded_password = Base64.getEncoder().encodeToString(password_message);
-	System.out.println(encoded_password);
+	//System.out.println(encoded_password);
 
 	byte[] user_message = user_name.getBytes(StandardCharsets.UTF_8);
 	String encoded_user = Base64.getEncoder().encodeToString(user_message);
-	System.out.println(encoded_user);
+	//System.out.println(encoded_user);
 
 	//Testing only
         encode_settings decode_tests = new encode_settings();

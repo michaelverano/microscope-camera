@@ -218,10 +218,10 @@ public class camera_gui extends Application {
 					public void handle(MouseEvent e) {
 					    //Test if config file exists
 					    configuration configs = new configuration();
-					    //boolean need_to_setup = configs.start();
+					    boolean need_to_setup = configs.start();
 					    
 					    //Create pop up to get config credentials
-					    //if (need_to_setup == true) {
+					    if (need_to_setup == true) {
 
 						Text gmailText = new Text("Gmail Account: ");
 						Text passText = new Text("Password");
@@ -260,21 +260,24 @@ public class camera_gui extends Application {
 									     new EventHandler<MouseEvent>() {
 										 public void handle(MouseEvent e) {
 
-										     //LEFT OFF HERE
-										     //STORE USER ACCOUNT AND PASSWORD
+										     
 										     encode_settings encoding = new encode_settings();
-										     String[] encoded_user,  encoded_pass = encoding.start_encoding(gmailtxtField.getText(), passTextField.getText());
+										     String[] encoded_data = encoding.start_encoding(gmailtxtField.getText(), passTextField.getText());
+										     // System.out.println(encoded_data[0]);
+										     // System.out.println(encoded_data[1]);
+
 										     //STORE USER ACCOUNT AND PASSWORD IN .PROPERTIES FILE
-
+										     configs.configure_file(encoded_data[0], encoded_data[1]);
+											     
 										     //CLOSE POP UP.
-
+										     dialog.close();
+										     
 										     //LOG INTO GOOGLE ACCOUNT.
 
 										 }
 									     });
-
-						
-						//}
+	
+						}
 						
 					    //store password and email in variable.
 					    
