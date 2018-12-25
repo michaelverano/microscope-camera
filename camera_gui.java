@@ -195,7 +195,7 @@ public class camera_gui extends Application {
 
 	    
 	    //Button 3 - Share Picture
-	    Button button3 = new Button("Share Picture");
+	    Button button3 = new Button("Log In");
 	    button3.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
 	    button3.setLayoutX(600.0f);
 	    button3.setLayoutY(ButtonHeight);
@@ -220,7 +220,6 @@ public class camera_gui extends Application {
 					    configuration configs = new configuration();
 					    boolean need_to_setup = configs.start();
 
-					    Boolean variables_available = new Boolean("false");
 					    //Create pop up to get config credentials
 					    if (need_to_setup == true) {
 
@@ -247,7 +246,7 @@ public class camera_gui extends Application {
 						gridPane.add(passTextField, 1, 1);
 						gridPane.add(submitButton, 0, 2);
 
-						//Set new stage and scene
+						//Set new stage and scene for login
 						final Stage dialog = new Stage();
 						dialog.initModality(Modality.APPLICATION_MODAL);
 						dialog.initOwner(stage);
@@ -268,17 +267,68 @@ public class camera_gui extends Application {
 					    						 //STORE USER ACCOUNT AND PASSWORD IN .PROPERTIES FILE
 					    						 configs.configure_file(encoded_data[0], encoded_data[1]);
 
-											 System.out.println(encoded_data[0]);
-					    	   					 System.out.println(encoded_data[1]);
+											 // System.out.println(encoded_data[0]);
+					    	   					 // System.out.println(encoded_data[1]);
 
 	   				     					        //CLOSE POP UP.
 					    					        dialog.close();
+
+											button3.setText("Send To");
 					    					 }
 					    				     });
+					    } else {
+					        button3.setText("Send To");
+						text1.setText("Already Logged in.");
+						
 					    }
 
-					    
-					     //SELECT USER TO SEND DATA TO
+					    //SELECT USER TO SEND DATA TO
+				       	    button3.addEventHandler(MouseEvent.MOUSE_CLICKED,
+						    new EventHandler<MouseEvent>() {
+							public void handle(MouseEvent e) {
+							    final Stage send_Stage  = new Stage();
+
+							    Text send_to_text = new Text("Send to email: ");
+							    TextField send_to_textField = new TextField();
+							    Button submit2 = new Button("Submit");
+
+							    GridPane gridPane_2 = new GridPane();
+
+		      	      				    gridPane_2.setMinSize(400, 200);
+						            gridPane_2.setVgap(5);
+						            gridPane_2.setHgap(5);
+						            gridPane_2.setAlignment(Pos.CENTER);
+
+							    gridPane_2.add(send_to_text, 0, 0);
+							    gridPane_2.add(send_to_textField, 1, 0);
+							    gridPane_2.add(submit2, 0, 1);
+
+							    final Stage dialog2 = new Stage();
+							    dialog2.initModality(Modality.APPLICATION_MODAL);
+							    dialog2.initOwner(stage);
+							    
+							    Scene SendData = new Scene(gridPane_2);
+							    dialog2.setScene(SendData);
+							    dialog2.show();
+
+							    submit2.addEventHandler(MouseEvent.MOUSE_CLICKED,
+										    new EventHandler<MouseEvent>() {
+											public void handle(MouseEvent e) {
+											    // LEFT OFF HERE
+											    // PASS THE VALUE OF THE TEXT FIELD TO A VARIABLE.
+			
+
+											    
+											    dialog2.close();
+											}
+										    });
+										    
+							    
+							}
+						    });
+
+					   
+				    
 
 					    //FIND THE JPG FILE
 					    
@@ -292,8 +342,7 @@ public class camera_gui extends Application {
 					    
 					    //Send picture to email.
 					}});
-				    
-				    
+
 	    
 	    
 	    // Text 3 - LTOR
