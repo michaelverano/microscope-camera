@@ -39,6 +39,7 @@ import camera.operations.findJPG;
 import camera.operations.configuration;
 import camera.operations.credentials_gui;
 import camera.operations.encode_settings;
+//import camera.operations.email_image;;
 
 //Import image functions
 import javafx.scene.image.Image;
@@ -174,7 +175,6 @@ public class camera_gui extends Application {
 						String JPG_file = parse_a_text.start(jpg_file);
 						System.out.println(JPG_file);
 
-						// Left off here
 						Image image = new Image(JPG_file);
 						ImageView imageView = new ImageView(image);
 						imageView.setX(10f);
@@ -219,7 +219,8 @@ public class camera_gui extends Application {
 					    //Test if config file exists
 					    configuration configs = new configuration();
 					    boolean need_to_setup = configs.start();
-					    
+
+					    Boolean variables_available = new Boolean("false");
 					    //Create pop up to get config credentials
 					    if (need_to_setup == true) {
 
@@ -255,31 +256,37 @@ public class camera_gui extends Application {
 						dialog.setScene(dialogScene);
 						dialog.show();
 
-						//Store user account and password.
-						submitButton.addEventHandler(MouseEvent.MOUSE_CLICKED,
-									     new EventHandler<MouseEvent>() {
-										 public void handle(MouseEvent e) {
-
-										     
-										     encode_settings encoding = new encode_settings();
-										     String[] encoded_data = encoding.start_encoding(gmailtxtField.getText(), passTextField.getText());
-										     // System.out.println(encoded_data[0]);
-										     // System.out.println(encoded_data[1]);
-
-										     //STORE USER ACCOUNT AND PASSWORD IN .PROPERTIES FILE
-										     configs.configure_file(encoded_data[0], encoded_data[1]);
-											     
-										     //CLOSE POP UP.
-										     dialog.close();
-										     
-										     //LOG INTO GOOGLE ACCOUNT.
-
-										 }
-									     });
-	
-						}
 						
-					    //store password and email in variable.
+						//Store user account and password.
+					    	submitButton.addEventHandler(MouseEvent.MOUSE_CLICKED,
+					    				     new EventHandler<MouseEvent>() {
+
+					    					 public void handle(MouseEvent e) {
+					    					 	encode_settings encoding = new encode_settings();
+					    					 	String[] encoded_data = encoding.start_encoding(gmailtxtField.getText(), passTextField.getText());
+
+					    						 //STORE USER ACCOUNT AND PASSWORD IN .PROPERTIES FILE
+					    						 configs.configure_file(encoded_data[0], encoded_data[1]);
+
+											 System.out.println(encoded_data[0]);
+					    	   					 System.out.println(encoded_data[1]);
+
+	   				     					        //CLOSE POP UP.
+					    					        dialog.close();
+					    					 }
+					    				     });
+					    }
+
+					    
+					     //SELECT USER TO SEND DATA TO
+
+					    //FIND THE JPG FILE
+					    
+					    //LOG INTO GOOGLE ACCOUNT
+					    //email_image email = new email_image();
+					    //email.start(var_1, var_2, var_3, var_4);
+					    
+					    //store password and email in variable from .properties file.
 					    
 					    //Test if users exist.
 					    

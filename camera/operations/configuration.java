@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
+//import java.io.BufferedReader.readLine();
 
 public class configuration {
 
@@ -49,9 +50,30 @@ public class configuration {
 	}
     }
 
+    //Retrieve data
+    public String[] retrieve_user_info()  {
+        String file_link = "./camera_gui.properties";
+
+	
+	try {
+	    Path file_ = Paths.get(file_link);
+	    String username = Files.readAllLines(file_).get(0);
+	    String password = Files.readAllLines(file_).get(1);
+
+	    return new String[] {username, password};
+
+	} catch (IOException e){
+	    System.out.println("properties file created.");
+
+	    //e.printStackTrace();
+	}
+	return null;
+    } 
+	    
     public static void main(String arg[]) {
 	configuration configs = new configuration();
-	configs.start();
-	configs.configure_file("Test_1", "Test_2");
+	// configs.start();
+	// configs.configure_file("Test_1", "
+	configs.retrieve_user_info();
     }
 }
