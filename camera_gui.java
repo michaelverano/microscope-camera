@@ -201,6 +201,14 @@ public class camera_gui extends Application {
 	    button3.setLayoutY(ButtonHeight);
 	    button3.setMinWidth(100.0f);
 	    button3.setMinHeight(50.0f);
+
+	     Button button4 = new Button("Cancel");
+	     button4.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+	     button4.setLayoutX(900.0f);
+	     button4.setLayoutY(ButtonHeight);
+	     button4.setMinWidth(100.0f);
+	     button4.setMinHeight(50.0f);
+	     button4.setVisible(false);
 	    
       	    // Button 3 Actions - Shadow when mouse cursor on top
 	    button3.addEventHandler(MouseEvent.MOUSE_ENTERED,
@@ -314,21 +322,38 @@ public class camera_gui extends Application {
 							    submit2.addEventHandler(MouseEvent.MOUSE_CLICKED,
 										    new EventHandler<MouseEvent>() {
 											public void handle(MouseEvent e) {
-											    // LEFT OFF HERE
-											    // PASS THE VALUE OF THE TEXT FIELD TO A VARIABLE.
-			
 
-											    
+											    System.out.println(send_to_textField.getText());
+											    text1.setText("Send to: " + send_to_textField.getText());
+											    button3.setText("Send");
 											    dialog2.close();
+
+
+
+											    //LEFT OFF HERE
+											    //CREATE A CANCEL BUTTON.
+											    button4.setVisible(true);
+
+											    // FIND THE JPG FILE
+
+											    // LOG INTO GOOGLE ACCOUNT
+
+											    // SEND IMAGE TO USER.
+
 											}
 										    });
-										    
+
+
+							    
+
+
+
+
+
 							    
 							}
 						    });
 
-					   
-				    
 
 					    //FIND THE JPG FILE
 					    
@@ -336,13 +361,13 @@ public class camera_gui extends Application {
 					    //email_image email = new email_image();
 					    //email.start(var_1, var_2, var_3, var_4);
 					    
-					    //store password and email in variable from .properties file.
-					    
-					    //Test if users exist.
-					    
 					    //Send picture to email.
 					}});
 
+
+
+
+	    
 	    
 	    
 	    // Text 3 - LTOR
@@ -354,7 +379,7 @@ public class camera_gui extends Application {
 	    text3.setY(650.0f);
 	    
 	    //Create Groupings
-	    Group root = new Group(rectangle, button1, button2, button3, rectangle2,
+	    Group root = new Group(rectangle, button1, button2, button3, button4, rectangle2,
 				   text1, text2, text3);
 	    
 	    //Creating a scene object
