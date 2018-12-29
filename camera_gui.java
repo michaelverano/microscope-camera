@@ -59,7 +59,7 @@ public class camera_gui extends Application {
 	public void start(Stage stage) throws Exception {
 	    //Text 1 - Detect Camera
 	    Text text1 = new Text();
-	    text1.setText("Detect Camera by Pressing 1, \n or clicking the button");
+	    text1.setText("Detect Camera first, take a picture \n then send it to an email.");
 	    text1.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 40));
 	    text1.setFill(Color.WHITE);
 	    text1.setX(50.0f);
@@ -108,7 +108,16 @@ public class camera_gui extends Application {
 					public void handle(MouseEvent e) {
 					    button1.setEffect(null);
 					}});
-	    
+
+	    //Button 2 - Take Picture
+	    Button button2 = new Button("Take Picture");
+	    button2.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+	    button2.setLayoutX(150.0f);
+	    button2.setLayoutY(ButtonHeight);
+	    button2.setMinWidth(100.0f);
+	    button2.setMinHeight(50.0f);
+	    button2.setDisable(true);
+
 	    //Button 1 When Clicked - Run gphoto2 auto-detect
 	    button1.addEventHandler(MouseEvent.MOUSE_CLICKED,
 	    			    new EventHandler<MouseEvent>() {
@@ -128,18 +137,13 @@ public class camera_gui extends Application {
 						rectangle.setFill(Color.BLACK);
 						text1.setText("Camera detected.");
 					        text2.setText(raw_text);
+						button2.setDisable(false);
 					    };
 	    				}});
 
 	    
-	    //Button 2 - Take Picture
-	    Button button2 = new Button("Take Picture");
-	    button2.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
-	    button2.setLayoutX(300.0f);
-	    button2.setLayoutY(ButtonHeight);
-	    button2.setMinWidth(100.0f);
-	    button2.setMinHeight(50.0f);
 
+	    
 	    //Button 2 Actions - shadow when mouse cursor on top
 	    button2.addEventHandler(MouseEvent.MOUSE_ENTERED,
 				    new EventHandler<MouseEvent>() {
@@ -197,19 +201,37 @@ public class camera_gui extends Application {
 	    //Button 3 - Share Picture
 	    Button button3 = new Button("Log In");
 	    button3.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
-	    button3.setLayoutX(600.0f);
+	    button3.setLayoutX(350.0f);
 	    button3.setLayoutY(ButtonHeight);
 	    button3.setMinWidth(100.0f);
 	    button3.setMinHeight(50.0f);
 
-	     Button button4 = new Button("Cancel");
-	     button4.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
-	     button4.setLayoutX(900.0f);
-	     button4.setLayoutY(ButtonHeight);
-	     button4.setMinWidth(100.0f);
-	     button4.setMinHeight(50.0f);
-	     button4.setVisible(false);
-	    
+	    Button button3a = new Button("Send to");
+	    button3a.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+	    button3a.setLayoutX(475.0f);
+	    button3a.setLayoutY(ButtonHeight);
+	    button3a.setMinWidth(100.0f);
+	    button3a.setMinHeight(50.0f);
+	    button3a.setDisable(true);
+
+	    Button button4 = new Button("Cancel");
+	    button4.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+	    button4.setLayoutX(800.0f);
+	    button4.setLayoutY(ButtonHeight);
+	    button4.setMinWidth(100.0f);
+	    button4.setMinHeight(50.0f);
+	    button4.setDisable(true);
+
+	    Button button5 = new Button("Send");
+	    button5.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+	    button5.setLayoutX(650.0f);
+	    button5.setLayoutY(ButtonHeight);
+	    button5.setMinWidth(100.0f);
+	    button5.setMinHeight(50.0f);
+	    button5.setDisable(true);
+
+
+	     
       	    // Button 3 Actions - Shadow when mouse cursor on top
 	    button3.addEventHandler(MouseEvent.MOUSE_ENTERED,
 				    new EventHandler<MouseEvent>() {
@@ -282,94 +304,81 @@ public class camera_gui extends Application {
 					    					        dialog.close();
 
 											button3.setText("Send To");
+											button3a.setDisable(false);
 					    					 }
 					    				     });
 					    } else {
-					        button3.setText("Send To");
-						text1.setText("Already Logged in.");
-						
-					    }
+						text1.setText("Logged in.");
+						button3a.setDisable(false);
+						button5.setDisable(false);
 
-					    //SELECT USER TO SEND DATA TO
-				       	    button3.addEventHandler(MouseEvent.MOUSE_CLICKED,
-						    new EventHandler<MouseEvent>() {
-							public void handle(MouseEvent e) {
-							    final Stage send_Stage  = new Stage();
+					    } // END OF IF-ELSE STATEMENT
+					}
+				    });
+				
+  	    //SELECT USER TO SEND DATA TO
+	    button3a.addEventHandler(MouseEvent.MOUSE_CLICKED,
+				     new EventHandler<MouseEvent>() {
+					 public void handle(MouseEvent e) {
+					    		    final Stage send_Stage  = new Stage();
 
-							    Text send_to_text = new Text("Send to email: ");
-							    TextField send_to_textField = new TextField();
-							    Button submit2 = new Button("Submit");
+					    		    Text send_to_text = new Text("Send to email: ");
+					    		    TextField send_to_textField = new TextField();
+					    		    Button submit2 = new Button("Submit");
 
-							    GridPane gridPane_2 = new GridPane();
+					    		    GridPane gridPane_2 = new GridPane();
 
-		      	      				    gridPane_2.setMinSize(400, 200);
-						            gridPane_2.setVgap(5);
-						            gridPane_2.setHgap(5);
-						            gridPane_2.setAlignment(Pos.CENTER);
+		      	      		    		    gridPane_2.setMinSize(400, 200);
+					    	            gridPane_2.setVgap(5);
+					    	            gridPane_2.setHgap(5);
+					    	            gridPane_2.setAlignment(Pos.CENTER);
 
-							    gridPane_2.add(send_to_text, 0, 0);
-							    gridPane_2.add(send_to_textField, 1, 0);
-							    gridPane_2.add(submit2, 0, 1);
+					    		    gridPane_2.add(send_to_text, 0, 0);
+					    		    gridPane_2.add(send_to_textField, 1, 0);
+					    		    gridPane_2.add(submit2, 0, 1);
 
-							    final Stage dialog2 = new Stage();
-							    dialog2.initModality(Modality.APPLICATION_MODAL);
-							    dialog2.initOwner(stage);
+					    		    final Stage dialog2 = new Stage();
+					    		    dialog2.initModality(Modality.APPLICATION_MODAL);
+					    		    dialog2.initOwner(stage);
 							    
-							    Scene SendData = new Scene(gridPane_2);
-							    dialog2.setScene(SendData);
-							    dialog2.show();
+					    		    Scene SendData = new Scene(gridPane_2);
+					    		    dialog2.setScene(SendData);
+					    		    dialog2.show();
 
-							    submit2.addEventHandler(MouseEvent.MOUSE_CLICKED,
-										    new EventHandler<MouseEvent>() {
-											public void handle(MouseEvent e) {
-
+					    		    submit2.addEventHandler(MouseEvent.MOUSE_CLICKED,
+					    					    new EventHandler<MouseEvent>() {
+					    						public void handle(MouseEvent e) {
 											    System.out.println(send_to_textField.getText());
-											    text1.setText("Send to: " + send_to_textField.getText());
-											    button3.setText("Send");
-											    dialog2.close();
-
-
-
-											    //LEFT OFF HERE
-											    //CREATE A CANCEL BUTTON.
-											    button4.setVisible(true);
-
-											    // FIND THE JPG FILE
-
-											    // LOG INTO GOOGLE ACCOUNT
-
-											    // SEND IMAGE TO USER.
-
+					    						    text1.setText("Send to: " + send_to_textField.getText());
+					    						    dialog2.close();
+											    
+					    						    button3.setDisable(true);
+					    						    button4.setDisable(false);
 											}
 										    });
+					 }
+				     });
 
+	    button4.addEventHandler(MouseEvent.MOUSE_CLICKED,
+				    new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent e) {
+					    text1.setText("Send to destination cancelled.");
+					    button4.setDisable(true);
+					    button3.setDisable(false);
+					}
+				    });
 
-							    
-
-
-
-
-
-							    
-							}
-						    });
-
-
+	    button5.addEventHandler(MouseEvent.MOUSE_CLICKED,
+				    new EventHandler<MouseEvent>() {
+				       	public void handle(MouseEvent e) {
 					    //FIND THE JPG FILE
-					    
 					    //LOG INTO GOOGLE ACCOUNT
 					    //email_image email = new email_image();
 					    //email.start(var_1, var_2, var_3, var_4);
-					    
 					    //Send picture to email.
-					}});
-
-
-
-
-	    
-	    
-	    
+					}
+				    });
+        
 	    // Text 3 - LTOR
 	    Text text3 = new Text();
 	    text3.setText("Written by Michael Verano\nFor bug fixes, email michael.verano@nyumc.org");
@@ -379,7 +388,7 @@ public class camera_gui extends Application {
 	    text3.setY(650.0f);
 	    
 	    //Create Groupings
-	    Group root = new Group(rectangle, button1, button2, button3, button4, rectangle2,
+	    Group root = new Group(rectangle, button1, button2, button3, button3a, button4, button5, rectangle2,
 				   text1, text2, text3);
 	    
 	    //Creating a scene object
