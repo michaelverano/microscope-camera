@@ -26,7 +26,7 @@ public class findJPG {
 	
 	if (JPGs.size() == 1) {
 	    System.out.println(JPGs.get(0));
-	    System.out.println("Test");
+	    //System.out.println("Test");
 	    return JPGs.get(0);
 	}
 

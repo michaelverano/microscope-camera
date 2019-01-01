@@ -310,7 +310,6 @@ public class camera_gui extends Application {
 					    } else {
 						text1.setText("Logged in.");
 						button3a.setDisable(false);
-						button5.setDisable(false);
 
 					    } // END OF IF-ELSE STATEMENT
 					}
@@ -354,6 +353,7 @@ public class camera_gui extends Application {
 											    
 					    						    button3.setDisable(true);
 					    						    button4.setDisable(false);
+											    button5.setDisable(false);
 											}
 										    });
 					 }
@@ -363,8 +363,9 @@ public class camera_gui extends Application {
 				    new EventHandler<MouseEvent>() {
 					public void handle(MouseEvent e) {
 					    text1.setText("Send to destination cancelled.");
-					    button4.setDisable(true);
 					    button3.setDisable(false);
+					    button4.setDisable(true);
+					    button5.setDisable(true);
 					}
 				    });
 
@@ -372,7 +373,26 @@ public class camera_gui extends Application {
 				    new EventHandler<MouseEvent>() {
 				       	public void handle(MouseEvent e) {
 					    //FIND THE JPG FILE
+					    findJPG JPG_file = new findJPG();
+					    String jpg_ = JPG_file.start();
+					    System.out.println(jpg_);
+
+					    if (jpg_.endsWith("JPG")) {
+						text1.setText("Picture found.");
+						text2.setText(jpg_);
+
+					    } else if (jpg_.equals("More than one JPG found.")) {
+						System.out.println("Test");
+						text1.setText("More than one JPG found. \nPlease select one.");
+						text2.setText("Have only one JPG in directory.");
+					    }
+
+					    
+						
 					    //LOG INTO GOOGLE ACCOUNT
+
+
+					    
 					    //email_image email = new email_image();
 					    //email.start(var_1, var_2, var_3, var_4);
 					    //Send picture to email.
