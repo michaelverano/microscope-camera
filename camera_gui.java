@@ -39,7 +39,7 @@ import camera.operations.findJPG;
 import camera.operations.configuration;
 import camera.operations.credentials_gui;
 import camera.operations.encode_settings;
-//import camera.operations.email_image;;
+import camera.operations.email_image;;
 
 //Import image functions
 import javafx.scene.image.Image;
@@ -314,7 +314,8 @@ public class camera_gui extends Application {
 					    } // END OF IF-ELSE STATEMENT
 					}
 				    });
-				
+
+	    TextField send_to_textField = new TextField();
   	    //SELECT USER TO SEND DATA TO
 	    button3a.addEventHandler(MouseEvent.MOUSE_CLICKED,
 				     new EventHandler<MouseEvent>() {
@@ -322,9 +323,10 @@ public class camera_gui extends Application {
 					    		    final Stage send_Stage  = new Stage();
 
 					    		    Text send_to_text = new Text("Send to email: ");
-					    		    TextField send_to_textField = new TextField();
+					    		    // TextField send_to_textField = new TextField();
+							    //send_to_textField = new TextField();
 					    		    Button submit2 = new Button("Submit");
-
+							    
 					    		    GridPane gridPane_2 = new GridPane();
 
 		      	      		    		    gridPane_2.setMinSize(400, 200);
@@ -348,7 +350,7 @@ public class camera_gui extends Application {
 					    					    new EventHandler<MouseEvent>() {
 					    						public void handle(MouseEvent e) {
 											    System.out.println(send_to_textField.getText());
-					    						    text1.setText("Send to: " + send_to_textField.getText());
+					    						    text2.setText("Send to: " + send_to_textField.getText());
 					    						    dialog2.close();
 											    
 					    						    button3.setDisable(true);
@@ -377,25 +379,40 @@ public class camera_gui extends Application {
 					    String jpg_ = JPG_file.start();
 					    System.out.println(jpg_);
 
-					    if (jpg_.endsWith("JPG")) {
-						text1.setText("Picture found.");
-						text2.setText(jpg_);
 
+					    String[] decoded_data = null;
+					    if (jpg_.endsWith("JPG")) {
+						text2.setText("Picture found.");
+						
+					    	//GET ENCRYPTED USERNAME AND PASSWORD
+						try {
+						        configuration configs = new configuration();
+							String[] user_data = configs.retrieve_user_info();
+
+							encode_settings encoding = new encode_settings();
+						        decoded_data = encoding.start_decoding(user_data[0], user_data[1]);
+
+						} catch (Exception ioex) {
+						    text1.setText("No data in .properties file.");
+
+						    configuration config = new configuration();
+						    config.delete_properties_file();
+						    
+						    button3.setDisable(false);
+						}
+
+					    	//LOG INTO GOOGLE ACCOUNT
+						email_image email = new email_image();
+					    	email.start(decoded_data[0], send_to_textField.getText(), decoded_data[1], jpg_);
+						
 					    } else if (jpg_.equals("More than one JPG found.")) {
-						System.out.println("Test");
 						text1.setText("More than one JPG found. \nPlease select one.");
 						text2.setText("Have only one JPG in directory.");
-					    }
+					    } else if (jpg_.equals("No JPGs found.")) {
+						text1.setText("Please take a picture.");
+						text2.setText("No images in directory.");
+					    }//END OF IF-ELSE STATEMENT
 
-					    
-						
-					    //LOG INTO GOOGLE ACCOUNT
-
-
-					    
-					    //email_image email = new email_image();
-					    //email.start(var_1, var_2, var_3, var_4);
-					    //Send picture to email.
 					}
 				    });
         

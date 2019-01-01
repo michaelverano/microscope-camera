@@ -1,4 +1,4 @@
-//package camera.operations;
+package camera.operations;
 import java.util.Properties;
 import java.io.*;
 import java.lang.*;

@@ -69,7 +69,19 @@ public class configuration {
 	}
 	return null;
     } 
+
+    public void delete_properties_file() {
+	try {
+	    File file_ = new File("./camera_gui.properties");
+	    file_.delete();
+	} catch (Exception e) {
 	    
+	}
+	
+
+    }
+
+    
     public static void main(String arg[]) {
 	configuration configs = new configuration();
 	// configs.start();
